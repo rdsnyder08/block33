@@ -77,12 +77,14 @@ async function attachActivitiesToRoutines(routines) {
 }
 
 // select and return an array of all activities
+//trying with token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOiJhbGJlcnQiLCJpYXQiOjE2OTE1MzUzNjMsImV4cCI6MTY5MjE0MDE2M30.NCwCa-FxiFNs0-7ul6uyg0yLFKbgnPQ1tAm0bX3B1tA
 async function createActivity({ name, description }){
   try {
     const {rows: [activity]} = await client.query(`
-      INSERT INTO activities(name, description) VALUES ($1, $2)
+      INSERT INTO activities(name, description) 
+      VALUES ($1, $2)
       ON CONFLICT (name) DO NOTHING 
-      RETURNING *
+      RETURNING *;
     `, [name, description]);
     return activity;
   } catch (error) {

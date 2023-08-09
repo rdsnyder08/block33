@@ -19,6 +19,7 @@ router.patch('/:routineActivityId', requireUser, requiredNotSent({requiredParams
       })
     } else {
       if(!await canEditRoutineActivity(req.params.routineActivityId, req.user.id)) {
+        console.log(req.user.id)
         res.status(403);
         next({name: "Unauthorized", message: "You cannot edit this routine_activity!"});
       } else {
